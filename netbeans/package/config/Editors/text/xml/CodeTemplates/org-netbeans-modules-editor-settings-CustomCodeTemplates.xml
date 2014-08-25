@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE codetemplates PUBLIC "-//NetBeans//DTD Editor Code Templates settings 1.0//EN" "http://www.netbeans.org/dtds/EditorCodeTemplates-1_0.dtd">
+<codetemplates><codetemplate abbreviation="mage_config" space="preserve"><code><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <${class}>
+            <version>0.1.0</version>
+        </${class}>
+    </modules>
+
+    <global>
+        <models>
+            <${alias}>
+                <class>${class}_Model</class>
+                <resourceModel>${alias}_mysql4</resourceModel>
+            </${alias}>
+            
+            <${alias}_mysql4>
+                <class>${class}_Model_Mysql4</class>
+                <entities>
+                    
+                </entities>
+            </${alias}_mysql4>
+        </models>
+        <blocks>
+            <${alias}>
+                <class>${class}_Block</class>
+            </${alias}>
+        </blocks>
+
+        <helpers>
+            <${alias}><class>${class}_Helper</class></${alias}>
+        </helpers>
+
+		<resources>
+			<${alias}_setup>
+				<setup>
+ 				   <module>${class}</module>
+				</setup>
+				<connection>
+				    <use>core_setup</use>
+				</connection>
+			</${alias}_setup>
+			<${alias}_write>
+				<connection>
+				    <use>core_write</use>
+				</connection>
+			</${alias}_write>
+			<${alias}_read>
+				<connection>
+				    <use>core_read</use>
+				</connection>
+			</${alias}_read>
+		</resources>
+        <fieldsets>
+             
+        </fieldsets>
+    </global>
+
+    <admin>
+    </admin>
+
+    <adminhtml>
+        <menu>
+            
+        </menu>
+    </adminhtml>
+
+    <frontend>
+    </frontend>
+    
+    <phpunit>
+        <suite>
+            <modules>
+            	<${class} />
+            </modules>
+        </suite>
+    </phpunit>
+</config>
+]]></code><description><![CDATA[Magento Module Config File]]></description></codetemplate><codetemplate abbreviation="mage_config_admin_routers" space="preserve"><code><![CDATA[<routers>
+          <${module}admin>
+              <use>admin</use>
+              <args>
+                  <module>${class}</module>
+                  <frontName>${module}admin</frontName>
+              </args>
+          </${module}admin>
+       </routers>
+]]></code></codetemplate><codetemplate abbreviation="mage_config_admin_routers_override" space="preserve"><code><![CDATA[<${overriden_module}>
+                <args>
+                    <modules>
+                        <${overrider_module} before="${Mage_Adminhtml}">${base_class}_Adminhtml</${overrider_module}>
+                    </modules>
+                </args>
+            </${overriden_module}>
+]]></code></codetemplate><codetemplate abbreviation="mage_config_adminhtml_acl" space="preserve"><code><![CDATA[<acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <${section}>
+                                            <title>${title}</title>
+                                        </${section}>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>]]></code><description><![CDATA[Create Access control list for admin configuration page(s)]]></description></codetemplate><codetemplate abbreviation="mage_config_adminhtml_events" space="preserve"><code><![CDATA[<events>
+		    <${event}>
+	            <observers>
+	                <${observer}>
+	                    <type>singleton</type>
+	                    <class>${module}/${model}</class>
+	                    <method>${method}</method>
+	                </${observer}>
+	            </observers>
+		    </${event}>
+		</events>
+]]></code><description><![CDATA[Magento Config.xml Adminhtml Events Observers definition]]></description></codetemplate><codetemplate abbreviation="mage_config_adminhtml_layout" space="preserve"><code><![CDATA[<layout>
+             <updates>
+                  <${module}>
+                        <file>${module}.xml</file>
+                  </${module}>
+             </updates>
+        </layout>
+]]></code></codetemplate><codetemplate abbreviation="mage_config_adminhtml_menu" space="preserve"><code><![CDATA[<${item} translate="title" module="${module}">
+                <title>${title}</title>
+                <action>${router}/${controller}/${action}</action>
+                <children>
+                    
+                </children>
+            </${item}>
+
+]]></code></codetemplate><codetemplate abbreviation="mage_config_adminhtml_translate" space="preserve"><code><![CDATA[<translate>
+            <modules>
+                <${Module_Name}>
+                    <files>
+                        <default>${Module_Name}.csv</default>
+                    </files>
+                </${Module_Name}>
+            </modules>
+        </translate>]]></code><description><![CDATA[Translation file config for adminhtml module translations]]></description></codetemplate><codetemplate abbreviation="mage_config_crontab" space="preserve"><code><![CDATA[<crontab>
+        <jobs>
+            <${job}>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <run><model>${module}/${model}::${method}</model></run>
+            </${job}>
+        </jobs>
+    </crontab>
+]]></code></codetemplate><codetemplate abbreviation="mage_config_default_email" space="preserve"><code><![CDATA[<${email}_identity>general</${email}_identity>
+                <${email}_template>${template}</${email}_template>]]></code><description><![CDATA[Email templates configs' default values]]></description></codetemplate><codetemplate abbreviation="mage_config_frontend_events" space="preserve"><code><![CDATA[<events>
+		    <${event}>
+	            <observers>
+	                <${observer}>
+	                    <type>singleton</type>
+	                    <class>${module}/${model}</class>
+	                    <method>${method}</method>
+	                </${observer}>
+	            </observers>
+		    </${event}>
+		</events>
+]]></code><description><![CDATA[Magento Config.xml Frontend Events Observers definition]]></description></codetemplate><codetemplate abbreviation="mage_config_frontend_layout" space="preserve"><code><![CDATA[<layout>
+             <updates>
+                  <${module}>
+                        <file>${module}.xml</file>
+                  </${module}>
+             </updates>
+        </layout>
+]]></code></codetemplate><codetemplate abbreviation="mage_config_frontend_routers_override" space="preserve"><code><![CDATA[<${overriden_module}>
+                <args>
+                    <modules>
+                        <${overrider_module} before="Mage_${module}">${base_class}</${overrider_module}>
+                    </modules>
+                </args>
+            </${overriden_module}>
+]]></code></codetemplate><codetemplate abbreviation="mage_config_frontend_routers_standard" space="preserve"><code><![CDATA[<${router}>
+                <use>standard</use>
+                <args>
+                    <module>${class_preffix}</module>
+                    <frontName>${router}</frontName>
+                </args>
+            </${router}>]]></code></codetemplate><codetemplate abbreviation="mage_config_frontend_secure_url" space="preserve"><code><![CDATA[<secure_url>
+            <${alias}>/${route}/</${alias}>
+        </secure_url>]]></code><description><![CDATA[define URL paths that must be opened as secure]]></description></codetemplate><codetemplate abbreviation="mage_config_frontent_translate" space="preserve"><code><![CDATA[<translate>
+            <modules>
+                <${Module_Name}>
+                    <files>
+                        <default>${Module_Name}.csv</default>
+                    </files>
+                </${Module_Name}>
+            </modules>
+        </translate>]]></code><description><![CDATA[Translation file config for frontent module translations]]></description></codetemplate><codetemplate abbreviation="mage_config_global_events" space="preserve"><code><![CDATA[<events>
+		    <${event}>
+	            <observers>
+	                <${observer}>
+	                    <type>singleton</type>
+	                    <class>${module}/${model}</class>
+	                    <method>${method}</method>
+	                </${observer}>
+	            </observers>
+		    </${event}>
+		</events>
+]]></code><description><![CDATA[Magento Config.xml Global Events Observers definition]]></description></codetemplate><codetemplate abbreviation="mage_config_global_fieldsets_address" space="preserve"><code><![CDATA[<sales_convert_quote_address>
+                <${attribute}>
+                    <to_customer_address>*</to_customer_address>
+                    <to_order_address>*</to_order_address>
+                </${attribute}>
+            </sales_convert_quote_address>
+            <customer_address>
+                <${attribute}>
+                    <to_quote_address>*</to_quote_address>
+                </${attribute}>
+            </customer_address>
+]]></code></codetemplate><codetemplate abbreviation="mage_config_global_models_mysql4" space="preserve"><code><![CDATA[<${module}_mysql4>
+                <class>${vendor}_${namespace}_Model_Mysql4</class>
+                <entities>
+                    <${table}>
+                        <table>${module}_${table}</table>
+                    </${table}>
+                </entities>
+            </${module}_mysql4>
+]]></code></codetemplate><codetemplate abbreviation="mage_config_global_page_layouts" space="preserve"><code><![CDATA[<page>
+            <layouts>
+		        <${handle} module="page" translate="label">
+		            <label>${label}</label>
+		            <template>page/${template}.phtml</template>
+		            <layout_handle>${handle}</layout_handle>
+		        </${handle}>
+            </layouts>
+        </page>]]></code><description><![CDATA[Global page layouts for handles]]></description></codetemplate><codetemplate abbreviation="mage_config_global_resources_setup_eav" space="preserve"><code><![CDATA[<class>Mage_Eav_Model_Entity_Setup</class>]]></code><description><![CDATA[Add EAV class as installer context to setup script]]></description></codetemplate><codetemplate abbreviation="mage_config_global_rewrite" space="preserve"><code><![CDATA[<rewrite>
+		    <${rewrite_name}>
+	            <from><![CDATA[#${from}#]]]]><![CDATA[></from>
+	            <to><![CDATA[${to}]]]]><![CDATA[></to>
+		    </${rewrite_name}>
+		</rewrite>
+]]></code><description><![CDATA[Add URL rewrite statement]]></description></codetemplate><codetemplate abbreviation="mage_config_global_template_email" space="preserve"><code><![CDATA[<template>
+            <email>
+               <${template} translate="label" module="${module}">
+                   <label>${label}</label>
+                   <file>${module}/${template}.html</file>
+                   <identity>sales</identity>
+                   <type>html</type>
+               </${template}>
+            </email>
+        </template>
+]]></code><description><![CDATA[Magento Config.xml Global Email Template definition]]></description></codetemplate><codetemplate abbreviation="mage_config_new" space="preserve"><code><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <${class}>
+            <version>0.1.0</version>
+        </${class}>
+    </modules>
+
+    <global>
+        <models>
+            <${alias}>
+                <class>${class}_Model</class>
+                <resourceModel>${alias}_mysql4</resourceModel>
+            </${alias}>
+            
+            <${alias}_mysql4>
+                <class>${class}_Model_Mysql4</class>
+                <entities>
+                    
+                </entities>
+            </${alias}_mysql4>
+        </models>
+        <blocks>
+            <${alias}>
+                <class>${class}_Block</class>
+            </${alias}>
+        </blocks>
+
+        <helpers>
+            <${alias}><class>${class}_Helper</class></${alias}>
+        </helpers>
+
+		<resources>
+			<${alias}_setup>
+				<setup>
+ 				   <module>${class}</module>
+				</setup>
+				<connection>
+				    <use>core_setup</use>
+				</connection>
+			</${alias}_setup>
+			<${alias}_write>
+				<connection>
+				    <use>core_write</use>
+				</connection>
+			</${alias}_write>
+			<${alias}_read>
+				<connection>
+				    <use>core_read</use>
+				</connection>
+			</${alias}_read>
+		</resources>        
+    </global>
+
+    <admin>
+    </admin>
+
+    <adminhtml>
+        <menu>
+            
+        </menu>
+    </adminhtml>
+
+    <frontend>
+    </frontend>
+</config>
+]]></code><description><![CDATA[Magento Module Config File]]></description></codetemplate><codetemplate abbreviation="mage_layout_block" space="preserve"><code><![CDATA[<block type="${module}/${path}" name="${name}" as="${name}" template="${module}/${path}.phtml"  output="toHtml" ></block>]]></code></codetemplate><codetemplate abbreviation="mage_layout_head_action_addCss" space="preserve"><code><![CDATA[<action method="addCss"><stylesheet>${file}.css</stylesheet></action>]]></code></codetemplate><codetemplate abbreviation="mage_layout_head_action_addJs" space="preserve"><code><![CDATA[<action method="addJs"><script>${file}.js</script></action>]]></code></codetemplate><codetemplate abbreviation="mage_layout_head_action_addSkinJs" space="preserve"><code><![CDATA[<action method="addItem"><type>skin_js</type><script>js/${file}.js</script></action>]]></code></codetemplate><codetemplate abbreviation="mage_layout_reference_action_insert" space="preserve"><code><![CDATA[<action method="insert"><block>${block}</block></action>]]></code></codetemplate><codetemplate abbreviation="mage_layout_reference_action_insert_after" space="preserve"><code><![CDATA[<action method="insert" after="${after}"><block>${block}</block></action> ]]></code></codetemplate><codetemplate abbreviation="mage_layout_reference_action_insert_before" space="preserve"><code><![CDATA[<action method="insert" before="-"><block>${block}</block></action> ]]></code></codetemplate><codetemplate abbreviation="mage_layout_reference_action_setTemplate" space="preserve"><code><![CDATA[<action method="setTemplate"><template>${module}/${template}.phtml</template></action>]]></code></codetemplate><codetemplate abbreviation="mage_layout_reference_block" space="preserve"><code><![CDATA[<block type="${module}/${block_path}" name="${module}_${block_path}" template="${module}/${block_path_slashes}.phtml"/>]]></code></codetemplate><codetemplate abbreviation="mage_layout_remove" space="preserve"><code><![CDATA[<remove name="${block}"/>
+]]></code></codetemplate><codetemplate abbreviation="mage_layout_root_action_setTemplate" space="preserve"><code><![CDATA[<action method="setTemplate"><template>${template}.phtml</template></action>
+            <action method="setIsHandle"><applied>1</applied></action> 
+]]></code></codetemplate><codetemplate abbreviation="mage_layout_update" space="preserve"><code><![CDATA[<update handle="${action}" />]]></code><description><![CDATA[Inherit block structure from another action (handle)]]></description></codetemplate><codetemplate abbreviation="mage_module" space="preserve"><code><![CDATA[<?xml version="1.0"?>
+<config>
+    <modules>
+        <${Vendor}_${Module}>
+            <active>true</active>
+            <codePool>local</codePool>
+            <self_name>${Vendor} ${Module}</self_name>
+            <priority>1001</priority>
+            <depends>
+                
+            </depends>
+        </${Vendor}_${Module}>
+    </modules>
+</config>]]></code></codetemplate><codetemplate abbreviation="mage_module_new" space="preserve"><code><![CDATA[<?xml version="1.0"?>
+<config>
+    <modules>
+        <${Vendor}_${Module}>
+            <active>true</active>
+            <codePool>local</codePool>
+            <self_name>${Vendor} ${Module}</self_name>
+            <priority>1001</priority>
+            <depends>
+                
+            </depends>
+        </${Vendor}_${Module}>
+    </modules>
+</config>]]></code></codetemplate><codetemplate abbreviation="mage_system" space="preserve"><code><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+        <${section} translate="label comment" module="${module}">
+            <tab>${general_customer_catalog_sales}</tab>
+            <label>${label}</label>
+            <frontend_type>text</frontend_type>
+            <sort_order>200</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                ${mage_system_group}
+            </groups>
+        </${section}>
+    </sections>
+</config>]]></code><description><![CDATA[Magento System Settings File]]></description></codetemplate><codetemplate abbreviation="mage_system_group" space="preserve"><code><![CDATA[<${group} translate="label comment" module="${module}">
+                    <label>${label}</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        ${mage_system_group_field}
+                    </fields>
+                </${group}>]]></code><description><![CDATA[Magento System Configuration Group]]></description></codetemplate><codetemplate abbreviation="mage_system_group_field_select" space="preserve"><code><![CDATA[<${field} translate="label">
+                            <label>${label}</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>${module}/system_config_source_${model}</source_model>
+                            <backend_model>${module}/system_config_backend_${model}</backend_model>
+                            <sort_order>${sort}</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[]]]]><![CDATA[></comment>
+                        </${field}>
+]]></code><description><![CDATA[Magento System Configuration Group Option]]></description></codetemplate><codetemplate abbreviation="mage_system_group_field_text" space="preserve"><code><![CDATA[<${field} translate="label">
+                            <label>${label}</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>${sort}</sort_order>
+                            <backend_model>${module}/system_config_backend_${model}</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[]]]]><![CDATA[></comment>
+                        </${field}>
+]]></code><description><![CDATA[Magento System Configuration Group Option]]></description></codetemplate><codetemplate abbreviation="mage_system_new" space="preserve"><code><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+        <${section} translate="label comment" module="${module}">
+            <tab>${general_customer_catalog_sales}</tab>
+            <label>${label}</label>
+            <frontend_type>text</frontend_type>
+            <sort_order>200</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                ${mage_system_group}
+            </groups>
+        </${section}>
+    </sections>
+</config>]]></code><description><![CDATA[Magento System Settings File]]></description></codetemplate><codetemplate abbreviation="mage_system_sections_groups_email_fields" space="preserve"><code><![CDATA[<${email}_identity translate="label">
+                            <label>Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </${email}_identity>
+                        <${email}_template translate="label">
+                            <label>Email Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </${email}_template>]]></code><description><![CDATA[Email configs template]]></description></codetemplate><codetemplate abbreviation="mage_widget" space="preserve"><code><![CDATA[<?xml version="1.0"?>
+<widgets>
+    <${widget_alias} type="${modulealias}/${widget_block}" translate="name description" module="${modulealias}">
+        <name>${Name}</name>
+        <description>${Description}</description>
+        <is_email_compatible>1</is_email_compatible>
+        <parameters>
+            ${mage_widget_parameter}
+        </parameters>
+    </${widget_alias}>
+</widgets>]]></code></codetemplate><codetemplate abbreviation="mage_widget_new" space="preserve"><code><![CDATA[<${widget_alias} type="${modulealias}/${widget_block}" translate="name description" module="${modulealias}">
+        <name>${Name}</name>
+        <description>${Description}</description>
+        <is_email_compatible>1</is_email_compatible>
+        <parameters>
+            ${mage_widget_parameter}
+        </parameters>
+    </${widget_alias}>
+]]></code></codetemplate><codetemplate abbreviation="mage_widget_parameter" space="preserve"><code><![CDATA[<${parameter} translate="label description">
+                <required>0</required>
+                <visible>1</visible>
+                <label>${Label}</label>
+                <description></description>
+                <type>${type}</type><!-- create new block or choose from: checkbox,checkboxes,date,editor,file,hidden,image,imagefile,label,multiline,multiselect,note,password,radio,radios,text,textarea,time -->
+                <value>${default_value}</value>
+                <sort_order>1</sort_order>
+            </${parameter}>
+]]></code></codetemplate><codetemplate abbreviation="mage_widget_parameter_depends" space="preserve"><code><![CDATA[<depends>
+                    <${parameter}>
+                        <value>${depends_value}</value>
+                    </${parameter}>
+                </depends>]]></code></codetemplate><codetemplate abbreviation="mage_widget_parameter_helper_block" space="preserve"><code><![CDATA[<helper_block>
+                    <type>${modulealias}/${helper_block}</type>
+                    <data>
+                        <button translate="${button}">
+                            <${button}>${Label}</${button}>
+                        </button>
+                    </data>
+                </helper_block>]]></code></codetemplate><codetemplate abbreviation="mage_widget_parameter_select" space="preserve"><code><![CDATA[<${parameter} translate="label description">
+                <required>0</required>
+                <visible>1</visible>
+                <label>${Label}</label>
+                <description></description>
+                <type>select</type>
+                <value>${default_value}</value>
+                <values>
+                    <default translate="label">
+                        <value>${default_value}</value>
+                        <label>${DefaultLabel}</label>
+                    </default>
+                </values>
+                <sort_order>1</sort_order>
+            </${parameter}>
+]]></code></codetemplate><codetemplate abbreviation="mage_widget_parameter_select_source" space="preserve"><code><![CDATA[<${parameter} translate="label description">
+                <required>0</required>
+                <visible>1</visible>
+                <label>${Label}</label>
+                <description></description>
+                <type>select</type>
+                <value>${default_value}</value>
+                <source_model>adminhtml/system_config_source_${source}</source_model>
+                <sort_order>1</sort_order>
+            </${parameter}>
+]]></code></codetemplate></codetemplates>
